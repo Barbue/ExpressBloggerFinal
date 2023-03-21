@@ -1,3 +1,4 @@
+
 const Blog = require('../models/Blogs');
 
 async function getAllBlogs(req, res) {
@@ -17,8 +18,8 @@ async function createOneBlog(req, res) {
       const title  = req.body.title 
       const text = req.body.text 
       const author = req.body.author
+      const categories = req.body.categories
       const year =  req.body.year;
-      const categories = req.body.category
   
       //pass fields to new Blog model 
       //notice how it's way more organized and does the type checking for us
@@ -26,8 +27,8 @@ async function createOneBlog(req, res) {
           title,
           text,
           author,
-          year,
-          categories
+          categories,
+          year
       });
   
       //save our new entry to the database 
