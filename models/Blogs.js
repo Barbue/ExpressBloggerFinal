@@ -9,8 +9,9 @@ const blogSchema = new mongoose.Schema({
     author: String,
     year: Number,
     categories: [String],
-    id: {type: String, default: uuidv4()},
-    createdAt: { type: Date, default: Date.now }
+    id: {type: String, default: uuidv4},
+    createdAt: { type: Date, default: Date.now },
+    // lastModified: { type: Date, default: Date.now}
 }); 
 
 //register model to collection
