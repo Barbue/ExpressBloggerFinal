@@ -4,8 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 //load environment variables from .env (.env is the default file)
+
+const cors = require('cors');
+
 require("dotenv").config();
 
+//look in our .env file for PORT, if it's not there, default to 5002.
+const PORT = process.env.PORT || 5002;
+
+var { mongooseConnect } = require('./mongoose.js');
+mongooseConnect();
 //register routes.
 //NOTE: notice how there is .js after index, this is because
 // we exported the module as index. 
@@ -13,11 +21,12 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var blogsRouter = require('./routes/blogs');
 
-//connecting to mongo db 
-var { mongoConnect } = require('./mongo.js');
-mongoConnect();
-
 var app = express();
+
+
+//add CORS middleware 
+app.use(cors());
+app.options("*", cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -52,6 +61,11 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-});
+}); 
+
+//only do this if you don't have a /bin directory
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port: ${PORT}`);
+// });
 
 module.exports = app;
