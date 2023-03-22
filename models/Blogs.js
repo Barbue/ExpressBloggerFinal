@@ -11,7 +11,7 @@ const blogSchema = new mongoose.Schema({
     categories: [String],
     id: {type: String, default: uuidv4},
     createdAt: { type: Date, default: Date.now },
-    // lastModified: { type: Date, default: Date.now}
+    lastModified: { type: Date, default: Date.now}
 }); 
 
 //register model to collection
